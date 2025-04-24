@@ -1,23 +1,22 @@
-# app.py
 from flask import Flask, jsonify
-import requests
-from bs4 import BeautifulSoup
+import random
 
 app = Flask(__name__)
 
 @app.route('/scrape', methods=['GET'])
-def scrape_quotes():
-    url = 'https://quotes.toscrape.com/'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+def get_contacts():
+    names = ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown']
+    emails = ['john@example.com', 'jane@example.com', 'alice@example.com', 'bob@example.com']
 
-    quotes = []
-    for quote in soup.find_all('div', class_='quote'):
-        text = quote.find('span', class_='text').get_text()
-        author = quote.find('small', class_='author').get_text()
-        quotes.append({'quote': text, 'author': author})
+    contacts = []
+    for i in range(4):
+        contacts.append({
+            'fullname': names[i],
+            'emailaddress1': emails[i],
+            'mobilephone': f'+23480{random.randint(10000000, 99999999)}'
+        })
 
-    return jsonify(quotes)
+    return jsonify(contacts)
 
 import os
 
