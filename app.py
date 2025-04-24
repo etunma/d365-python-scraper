@@ -5,13 +5,15 @@ app = Flask(__name__)
 
 @app.route('/scrape', methods=['GET'])
 def get_contacts():
-    names = ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown']
+    first_names = ['John', 'Jane', 'Alice', 'Bob']
+    last_names = ['Doe', 'Smith', 'Johnson', 'Brown']
     emails = ['john@example.com', 'jane@example.com', 'alice@example.com', 'bob@example.com']
 
     contacts = []
     for i in range(4):
         contacts.append({
-            'fullname': names[i],
+            'firstname': first_names[i],
+            'lastname': last_names[i],
             'emailaddress1': emails[i],
             'mobilephone': f'+23480{random.randint(10000000, 99999999)}'
         })
